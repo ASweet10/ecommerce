@@ -1,2 +1,2 @@
-Next.js(https://nextjs.org/) project bootstrapped with [`create-next-app`]
+Modern ecommerce site using React, Next.JS, Sanity, and Stripe
 
