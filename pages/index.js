@@ -5,30 +5,26 @@ import Product from '../components/Product';
 import HeroBanner from '../components/HeroBanner';
 import FooterBanner from '../components/FooterBanner';
 
-const index = ({ products, bannerData }) => {
-  return (
-    //Empty React fragment to wrap everything
-    <>
+const index = ({ products, bannerData }) => (
+    <div>
       <HeroBanner heroBanner={bannerData.length && bannerData[0]}/>
 
-      <div className='products-heading'>
+      <div className="products-heading">
         <h2>Soccer products</h2>
         <p>Futbol</p>
       </div>
 
-      <div className='products-container'>
+      <div className="products-container">
 
         {/* Loop over products & return product's name
               -(?) checking if products exist */}
-        {products?.map((product) => <Product key={product.id} product={product} />)}
+        {products?.map((product) => <Product key={product._id} product={product} />)}
       </div>
 
       <FooterBanner footerBanner={bannerData.length && bannerData[0]}/>
 
-    </>
-
-  )
-};
+    </div>
+  );
 
 export const getServerSideProps = async () => {
   //Grab all products from Sanity dashboard
@@ -42,4 +38,4 @@ export const getServerSideProps = async () => {
     props: { products, bannerData}
   }
 }
-export default index
+export default index;

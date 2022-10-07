@@ -1,5 +1,5 @@
-import React from 'react'
-import Link from  'next/Link'
+import React from 'react';
+import Link from  'next/link';
 
 import { urlFor } from "../LIB/client";
 
@@ -19,7 +19,7 @@ const FooterBanner = ( {footerBanner: {
         <div className="right">
           <p>{smallText}</p>
           <h3>{midText}</h3>
-          <Link href={'/product/${product}'}>
+          <Link href={`/product/${product}`}>
             <button type="button">{buttonText}</button>
           </Link>
         </div>

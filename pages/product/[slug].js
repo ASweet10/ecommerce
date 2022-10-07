@@ -1,7 +1,7 @@
 //[Slug] in brackets causes slug to be rendered dynamically in URL
 import React, {useState} from 'react';
 import  { client, urlFor } from '../../LIB/client';
-import { product } from '../../components';
+import {  Product } from '../../components';
 import { AiOutlineMinus, AiOutlinePlus, AiFillStar, AiOutlineStar} from 'react-icons/ai';
 import { useStateContext } from '../../context/StateContext';
 
@@ -9,6 +9,8 @@ import { useStateContext } from '../../context/StateContext';
 const ProductDetails = ({ product, products }) => {
     const { image, name, details, price } = product;
     const [index, setIndex] = useState(0);
+    const { decQty, incQty, qty, onAdd } = useStateContext();
+
   return (
         <div>
             <div className="product-detail-container">
@@ -16,9 +18,12 @@ const ProductDetails = ({ product, products }) => {
                     <div className="image-container">
                         <img src={ urlFor(image && image[index]) } className="product-detail-image"/>
                     </div>
+
                     <div className="small-images-container">
                         {image?.map((item, i) => (
-                            <img src={urlFor(item)}
+                            <img 
+                                key = {i}
+                                src={urlFor(item)}
                                 className={i === index ? 
                                 'small-image selected-image' :
                                 'small-image'}
@@ -27,7 +32,6 @@ const ProductDetails = ({ product, products }) => {
                         ))}
                     </div>
                 </div>
-            </div>
 
             <div className="product-detail-desc">
                 <h1>{name}</h1>
@@ -38,24 +42,25 @@ const ProductDetails = ({ product, products }) => {
                         <AiFillStar />
                         <AiOutlineStar />
                     </div>
-                    <p>Number of reviews(20)</p>
+                    <p>(110)</p>
                 </div>
                 <h4>Details: </h4>
                 <p>{details}</p>
                 <p className="price">${price}</p>
-                <div className="quanity">
+                <div className="quantity">
                     <h3>Quantity</h3>
                     <p className="quantity-desc">
-                        <span className="minus" onClick=""><AiOutlineMinus/></span>
-                        <span className="num" onClick="">0</span>
-                        <span className="plus" onClick=""><AiOutlinePlus/></span>
+                        <span className="minus" onClick={ decQty }><AiOutlineMinus /></span>
+                        <span className="num">{qty}</span>
+                        <span className="plus" onClick={ incQty }><AiOutlinePlus /></span>
                     </p>
                 </div>
                 <div className="buttons">
-                    <button type="button" className="add-to-cart" onclick="">Add To Cart</button>
-                    <button type="button" className="buy-now" onclick="">Buy Now</button>
+                    <button type="button" className="add-to-cart" onClick={ () => onAdd(product, qty) }>Add To Cart</button>
+                    <button type="button" className="buy-now">Buy Now</button>
                 </div>
             </div>
+        </div>
 
             <div className="maylike-products-wrapper">
                 <h2>You may also like</h2>
@@ -109,12 +114,9 @@ export const getStaticProps = async ({ params: { slug }}) => {
 
     const product = await client.fetch(query);
     const products = await client.fetch(productsQuery);
-  
-    const bannerQuery = '*[_type == "banner"]';
-    const bannerData = await client.fetch(bannerQuery);
-  
+    
     return {
-      props: { products, bannerData}
+      props: { product, products}
     }
   }
 
