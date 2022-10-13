@@ -36,6 +36,11 @@ export default {
             name: 'details',
             title: 'Details',
             type: 'string',
+        },
+        {
+            name: 'productType',
+            title: 'Product Type',
+            type: 'string',
         }
     ]
 }

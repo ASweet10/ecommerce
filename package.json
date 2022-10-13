@@ -12,13 +12,16 @@
     "@sanity/client": "3.4.1",
     "@sanity/image-url": "1.0.1",
     "@stripe/stripe-js": "1.38.1",
+    "canvas-confetti": "1.5.1",
+    "firebase": "^9.12.1",
     "next": "12.3.1",
     "next-sanity-image": "4.1.0",
     "react": "18.2.0",
     "react-dom": "18.2.0",
+    "react-firebase-hooks": "^5.0.3",
     "react-hot-toast": "2.4.0",
     "react-icons": "4.4.0",
-    "canvas-confetti": "1.5.1",
+    "react-router-dom": "^6.4.2",
     "stripe": "10.13.0"
   },
   "devDependencies": {
